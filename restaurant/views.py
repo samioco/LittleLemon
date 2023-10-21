@@ -1,5 +1,37 @@
-from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render
+from django.contrib.auth.models import User
 
-def index(request):
-  return render(request, 'index.html', {})
+from rest_framework import viewsets, permissions, status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, DestroyAPIView
+
+from .models import MenuItem, Booking
+from .serializers import MenuItemSerializer, BookingSerializer, UserSerializer
+
+
+# @api_view(['POST']) # wrapped to use Response class
+# def books(request):
+#   return Response('list of the books', status=status.HTTP_200_OK)
+
+# def index(request):
+#   return render(request, 'index.html', {})
+
+class UserViewSet(viewsets.ModelViewSet):
+  queryset = User.objects.all()
+  serializer_class = UserSerializer
+  permission_classes = [permissions.IsAuthenticated]
+  
+class BookingViewSet(viewsets.ModelViewSet):
+  queryset = Booking.objects.all()
+  serializer_class = BookingSerializer
+  
+class MenuItemView(ListCreateAPIView):
+  queryset = MenuItem.objects.all()
+  serializer_class = MenuItemSerializer
+  
+class SingleMenuItemView(RetrieveUpdateAPIView, DestroyAPIView):
+  queryset = MenuItem.objects.all()
+  serializer_class = MenuItemSerializer
+  
