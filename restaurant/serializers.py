@@ -10,7 +10,7 @@ class UserSerializer(ModelSerializer):
 class MenuItemSerializer(ModelSerializer):
   class Meta:
     model = MenuItem
-    fields = ['Title', 'Price', 'Inventory']
+    fields = ['title', 'price', 'inventory']
     
 class  BookingSerializer(ModelSerializer):
   class Meta:

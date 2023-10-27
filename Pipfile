@@ -9,6 +9,7 @@ djangorestframework = "*"
 mysqlclient = "*"
 djangorestframework-xml = "*"
 djoser = "*"
+shell = "*"
 
 [dev-packages]
 
